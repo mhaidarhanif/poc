@@ -5,6 +5,14 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "POC" }];
 }
 
+export async function loader({ request }: Route.LoaderArgs) {
+  const example = "Example";
+
+  console.log("Example", { example });
+
+  return { data: example };
+}
+
 export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
 
@@ -18,7 +26,10 @@ export async function action({ request }: Route.ActionArgs) {
   return { data: contactFormData };
 }
 
-export default function Contact({ actionData }: Route.ComponentProps) {
+export default function Contact({
+  loaderData,
+  actionData,
+}: Route.ComponentProps) {
   return (
     <div className="max-w-md mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Contact Us</h1>
@@ -56,7 +67,9 @@ export default function Contact({ actionData }: Route.ComponentProps) {
           </button>
         </Form>
 
-        <pre className="text-xs">{JSON.stringify(actionData, null, 2)}</pre>
+        <pre className="text-xs">
+          {JSON.stringify({ loaderData, actionData }, null, 2)}
+        </pre>
       </section>
     </div>
   );
