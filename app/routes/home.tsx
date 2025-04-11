@@ -5,7 +5,7 @@ export function meta({}: Route.MetaArgs) {
   return [{ title: "POC" }];
 }
 
-export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   const example = "Example";
 
   console.log("Example", { example });
@@ -13,7 +13,7 @@ export async function clientLoader({ request }: Route.ClientLoaderArgs) {
   return { data: example };
 }
 
-export async function clientAction({ request }: Route.ClientActionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   const formData = await request.formData();
 
   const contactFormData = {
